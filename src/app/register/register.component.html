@@ -1,0 +1,69 @@
+<div class="container-fluid text-center" *ngIf="errorCode != undefined">
+  <h2 class="text-danger-emphasis">{{errorCode}}</h2>
+</div>
+<section class="vh-100 bg-image"
+         style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+              <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                  <input type="email" id="form3Example3cg" class="form-control form-control-lg
+                          'has-danger'= email.invalid && (email.dirty || email.touched),
+                          'has-success'= email.valid && (email.dirty || email.touched)"
+                         formControlName="email"/>
+                  <span *ngIf="formRegister.controls['email'].getError('required')
+                  && (formRegister.controls['email'].dirty || formRegister.controls['email'].touched)"
+                        class="text-invalid">Email is empty</span>
+                  <span *ngIf="formRegister.controls['email'].getError('pattern')
+                  && (formRegister.controls['email'].dirty || formRegister.controls['email'].touched)"
+                        class="text-invalid">Email is invalid</span>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <input type="password" id="form3Example4cg" class="form-control form-control-lg"
+                         formControlName="password"/>
+                  <span *ngIf="formRegister.controls['password'].getError('minlength')
+                  && (formRegister.controls['password'].dirty || formRegister.controls['password'].touched)"
+                        class="text-invalid">Password is too short</span>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg"
+                         formControlName="passwordRepeat"/>
+                  <span *ngIf="formRegister.controls['passwordRepeat'].getError('minlength')
+                  && (formRegister.controls['passwordRepeat'].dirty || formRegister.controls['passwordRepeat'].touched)"
+                        class="text-invalid">Password is too short</span>
+                  <span *ngIf="(formRegister.controls['passwordRepeat'].getError('passwordMatchingValidator')
+                    || formRegister.controls['password'].getError('passwordMatchingValidator'))
+                  && (formRegister.controls['passwordRepeat'].dirty
+                    || formRegister.controls['passwordRepeat'].touched)"
+                        class="text-invalid">Passwords don't match</span>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit"
+                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                          [disabled]="!formRegister.valid">Register</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account?
+                  <a href="/login" class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "springboot-starter-74688": {
+      "hosting": {
+        "angular-app-starter": [
+          "springboot-starter-74688"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "springboot-starter-74688"
+  }
+}
