@@ -1,3 +1,8 @@
 .nav {
   background-color: mintcream;
+  display: inline-block;
+}
+
+nav>li {
+  display: inline-block;
 }

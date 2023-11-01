@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../services/user.service";
-import {Router} from "@angular/router";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { UserAuthService } from "../services/user.auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -9,12 +9,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  formLogin: FormGroup;
+  loginForm: FormGroup;
+  private errorCode: string | undefined;
+  private errorMessage: string | undefined;
 
-  constructor(private userService: UserService,
+  constructor(private userService: UserAuthService,
               private router: Router,
               private formBuilder: FormBuilder) {
-    this.formLogin = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       email: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -28,6 +30,17 @@ export class LoginComponent {
   }
 
   onSubmit() {
-
+    this.userService.loginByEmailAndPassword(this.loginForm.value)
+      .then(userCredential => {
+        // console.log(userCredential);
+        // console.log("userCredential.user=" + user);
+        this.router.navigate(['']);
+        //const user = userCredential.user;
+      })
+      .catch(error => {
+        this.errorCode = error.code;
+        this.errorMessage = error.message;
+        console.log(this.errorCode + " " + this.errorMessage);
+      });
   }
 }

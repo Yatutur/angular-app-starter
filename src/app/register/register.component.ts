@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import { UserService } from "../services/user.service";
+import { UserAuthService } from "../services/user.auth.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 export class RegisterComponent {
   formRegister: FormGroup;
   errorCode: string | undefined;
-  constructor(private userService: UserService,
+  constructor(private userService: UserAuthService,
               private router: Router,
               private formBuilder: FormBuilder) {
     this.formRegister = this.formBuilder.group({
